@@ -2,7 +2,7 @@
   "author": "Florian Traverse <florian.traverse@gmail.com> (http://pullrequest.org)",
   "name": "addTimeout",
   "description": "Wraps a callback to handle a timeout. If the timeout occurs before the callback being called, it either uses the first argument for returning the TimeoutError (Node.JS style) or let it handle by a specialized handler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": ["timeout", "timeframe", "callback"],
   "homepage": "http://github.com/temsa/addTimeout",
   "repository": {
