@@ -5,7 +5,7 @@ var addTimeout = require("addTimeout");
 var callback = function(err){
   if(err)
     throw err;
-  console.log("hello, world : this has been firef before the timeout !"
+  console.log("hello, world : this has been fired before the timeout !"
 };
 
 // here is some examples with setTimeout
