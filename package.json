@@ -1,0 +1,21 @@
+{
+  "author": "Florian Traverse <florian.traverse@gmail.com> (http://pullrequest.org)",
+  "name": "addTimeout",
+  "description": "Wraps a callback to handle a timeout. If the timeout occurs before the callback being called, it either uses the first arguemnt for returning the Timeout Error",
+  "version": "0.1.0",
+  "keywords": ["timeout", "timeframe", "callback"],
+  "homepage": "http://homepage",
+  "repository": {
+    "type": "git",
+    "url": "git repo"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "dependencies": {},
+  "devDependencies": {"vows":">=0.5.8"}
+}
