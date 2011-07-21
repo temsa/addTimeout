@@ -4,10 +4,10 @@
   "description": "Wraps a callback to handle a timeout. If the timeout occurs before the callback being called, it either uses the first arguemnt for returning the Timeout Error",
   "version": "0.1.0",
   "keywords": ["timeout", "timeframe", "callback"],
-  "homepage": "http://homepage",
+  "homepage": "http://github.com/temsa/addTimeout",
   "repository": {
     "type": "git",
-    "url": "git repo"
+    "url": "https://github.com/temsa/addTimeout.git"
   },
   "main": "index.js",
   "scripts": {
