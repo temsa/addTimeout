@@ -1,17 +1,19 @@
 function TimeoutError(message) {
-  this.name = "TimeoutError";
-  this.message = (message || "");
+  var e = new Error(message);
+  for (var prop in e) {
+    this[prop]=e[prop];
+  }
 }
-TimeoutError.prototype = Error.prototype;
+TimeoutError.prototype = new Error();
 
 function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler) {
-  var timedOut = false;
+  var startDate = new Date();
   
   //starts the timer
   var timeoutId = setTimeout(
     function onTimeout(){
       timedOut = true;
-      var err = new TimeoutError("A timeout of "+duration+"ms occured for callback ["+
+      var err = new TimeoutError( "A timeout of "+duration+"ms occured for callback ["+
         (callback.name||"Anonymous (you should name your callback!)")
         +"]");
       	 
@@ -22,7 +24,7 @@ function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler) {
     }, duration);
 	
   return function checksTimeout(){
-    if(timedOut) // setTimeout already fired callback or errHandler
+    if(new Date() - startDate > duration) // if time to get there is longer than timout, let the onTimeoutHappen. Useful for very short delay
       return;
     clearTimeout(timeoutId);
     return callback.apply(this, arguments);
