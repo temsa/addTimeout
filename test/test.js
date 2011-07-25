@@ -86,8 +86,15 @@ vows.describe('addTimeout').addBatch({
           var cb = this.callback;
          	setTimeout(addTimeout(500, function(err){console.log("Called callback with arguments: ", argument)}, cb), 1000);
          },
-         'we get an error!': function (err) {
+         'we get an error': function (err) {
+            assert.isObject(err);
+         },
+         'we get a TimeoutError': function (err) {
             assert.instanceOf(err, addTimeout.TimeoutError);
+         },
+         'we have a stacktrace in the TimeoutError': function (err) {
+           console.log(err.stack);
+            //assert.instanceOf(err, addTimeout.TimeoutError);
          }
        }
       }

@@ -1,13 +1,13 @@
 function TimeoutError(message) {
   var e = new Error(message);
-  for (var prop in e) {
-    this[prop]=e[prop];
-  }
+  this.name = TimeoutError;
+  this.stack = e.stack;
 }
 TimeoutError.prototype = new Error();
 
 function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler) {
   var startDate = new Date();
+  var timeoutLength = (duration > 0) ? duration : 0;
   
   //starts the timer
   var timeoutId = setTimeout(
@@ -21,7 +21,7 @@ function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler) {
         return errHandler(err, duration, callback);
       else
         return callback(err);
-    }, duration);
+    }, timeoutLength);
 	
   return function checksTimeout(){
     if(new Date() - startDate > duration) // if time to get there is longer than timout, let the onTimeoutHappen. Useful for very short delay
