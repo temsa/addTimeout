@@ -20,5 +20,10 @@ setTimeout(addTimeout(500, callback, errHandler), 100); //max timeout: 500ms, se
 setTimeout(addTimeout(500, callback, errHandler), 1000); //max timeout: 500ms, setTimeout will call the callback in 1000ms -> too late : TimeoutError ! -> callback will not be called, but errHandler will, getting the Error as first argument
 ```
 
+## Notes
+
+Supports negative timeout (always fail) as well a short time (<20ms) timeout. In those cases,
+the callback will be called asap, but it's likely to be in ~20ms after addTimeout call
+
 ## License
 MIT license
