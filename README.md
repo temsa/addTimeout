@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/temsa/addTimeout.png)](http://travis-ci.org/temsa/addTimeout)
 ## Usage
 ```javascript
 var addTimeout = require("addTimeout");
