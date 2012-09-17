@@ -1,6 +1,7 @@
 function TimeoutError(message) {
   var e = new Error(message);
-  this.name = TimeoutError;
+  this.name = 'TimeoutError';
+  this.message = message;
   this.stack = e.stack;
 }
 TimeoutError.prototype = new Error();
