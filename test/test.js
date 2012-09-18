@@ -17,30 +17,33 @@ vows.describe('addTimeout').addBatch({
       },
       '*after* timeout (1000ms)': {
         topic: function () {
-          var cb = this.callback;
-        	setTimeout(addTimeout(500, cb), 1000);
+	   var self  = this;
+       	    setTimeout(addTimeout(500, function namedCallback(err) { return self.callback(err); }), 1000);
         },
         'we get an error!': function (err) {
           assert.instanceOf(err, addTimeout.TimeoutError);
+          assert.equal('TimeoutError', err.name);
+          assert.equal(err.toString(), 'TimeoutError: A timeout of 500ms occured for callback [namedCallback]');
         }
        }
       }
     },
     'with a negative timeout (-500)': {
-     'and a callback that is called': {
+     'and a named callback that is called': {
       '*as soon as possible* (synchronously)': {
         topic: function () {
           var cb = this.callback;
           addTimeout(-500, cb);
         },
         'we get *an* error (this delay is unereachable)': function (err) {
-            assert.instanceOf(err, addTimeout.TimeoutError);
+          assert.instanceOf(err, addTimeout.TimeoutError);
+          assert.equal(err.toString(), 'TimeoutError: A timeout of -500ms occured for callback [Anonymous (you should name your callback!)]');
         }
       },
       '*after* timeout (10ms)': {
         topic: function () {
           var cb = this.callback;
-        	setTimeout(addTimeout(-500, cb), 10);
+          setTimeout(addTimeout(-500, cb), 10);
         },
         'we get an error!': function (err) {
           assert.instanceOf(err, addTimeout.TimeoutError);
