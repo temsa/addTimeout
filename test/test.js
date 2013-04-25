@@ -25,7 +25,19 @@ vows.describe('addTimeout').addBatch({
           assert.equal('TimeoutError', err.name);
           assert.equal(err.toString(), 'TimeoutError: A timeout of 500ms occured for callback [namedCallback]');
         }
-       }
+       },
+       '*after* timeout (1000ms) - explictly named callback': {
+        topic: function () {
+       var self  = this;
+            setTimeout(addTimeout(500, this.callback, undefined, 'my callback name'), 1000);
+        },
+        'we get an error!': function (err) {
+          assert.instanceOf(err, addTimeout.TimeoutError);
+          assert.equal('TimeoutError', err.name);
+          assert.equal(err.toString(), 'TimeoutError: A timeout of 500ms occured for callback [my callback name]');
+        }
+       },
+       
       }
     },
     'with a negative timeout (-500)': {

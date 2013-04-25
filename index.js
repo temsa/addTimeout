@@ -6,7 +6,7 @@ function TimeoutError(message) {
 }
 TimeoutError.prototype = new Error();
 
-function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler) {
+function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler, /*optional*/callbackName) {
   var startDate = new Date();
   var timeoutLength = (duration > 0) ? duration : 0;
   
@@ -15,16 +15,16 @@ function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler) {
     function onTimeout(){
       timedOut = true;
       var err = new TimeoutError( "A timeout of "+duration+"ms occured for callback ["+
-        (callback.name||"Anonymous (you should name your callback!)") +
+        (callbackName||callback.name||"Anonymous (you should name your callback!)") +
         "]");
-      	 
+         
       if(errHandler) {
         return errHandler(err, duration, callback);
       } else {
         return callback(err);
       }
     }, timeoutLength);
-	
+    
   return function checksTimeout(){
     if(new Date() - startDate > duration) {
       // if time to get there is longer than timeout, let the onTimeoutHappen. Useful for very short delay
