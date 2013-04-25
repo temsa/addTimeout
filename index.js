@@ -15,7 +15,7 @@ function addTimeout(/*in ms*/duration, callback, /*optional*/errHandler, /*optio
     function onTimeout(){
       timedOut = true;
       var err = new TimeoutError( "A timeout of "+duration+"ms occured for callback ["+
-        (callbackName||pcallback.name||"Anonymous (you should name your callback!)") +
+        (callbackName||callback.name||"Anonymous (you should name your callback!)") +
         "]");
          
       if(errHandler) {
